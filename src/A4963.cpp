@@ -1,7 +1,10 @@
 #include "A4963.h"
 #include "SPI.h"
+#ifdef ARDUINO_ARCH_AVR
 #include "PinChangeInterrupt.h"
+#endif
 
+#define SS_PIN 10
 #define PWM_PIN 9
 #define SPD_PIN 8
 #define FAULT_PIN 7
@@ -34,8 +37,10 @@ void A4963Controler::setPWM(uint8_t pwm_value)
 
 uint16_t A4963Controler::SPITransaction(uint16_t value)
 {
-	SPI.beginTransaction(SPISettings(SPI_SPEED, MSBFIRST, SPI_MODE0));
+	SPI.beginTransaction(SPISettings(SPI_SPEED, MSBFIRST, SPI_MODE3));
+	digitalWrite(SS_PIN, LOW);
 	value = SPI.transfer16(value);
+	digitalWrite(SS_PIN, HIGH);
 	SPI.endTransaction();
 	return value;
 }
@@ -50,6 +55,7 @@ uint16_t A4963Controler::read(uint16_t address)
 	return SPITransaction(address | REG_READ);
 }
 
+#ifdef ARDUINO_ARCH_AVR
 void A4963Controler::onFault(CallbackPtr callback)
 {
 	if(callback)
@@ -73,6 +79,7 @@ void A4963Controler::onSpeed(CallbackPtr callback)
 		detachPCINT(digitalPinToPCINT(SPD_PIN));
 	}
 }
+#endif
 
 A4963Controler A4963;
 
