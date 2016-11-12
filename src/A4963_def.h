@@ -49,7 +49,7 @@
 #define PW4 4
 #define DGC 5
 #define SH0 6
-#define SH11 7
+#define SH1 7
 #define CP0 8
 #define CP1 9
 #define CP2 10
@@ -126,6 +126,50 @@
 #define POR 14
 #define FF 15
 
+
+//config0 constants
+#define RECIRCULATION_AUTO 0
+#define RECIRCULATION_HIGH (1<<RM0)
+#define RECIRCULATION_LOW (1<<RM1)
+#define RECIRCULATION_ASYNC ((1<<RM1)|(1<<RM0))
+#define BLANK_TIME(N) ((N&0x0F)<<BT0)
+#define DEAD_TIME(N) ((N&0x3F)<<DT0)
+
+//config1 constants
+#define PERCENT_FAST_DECAY_12_5 0
+#define PERCENT_FAST_DECAY_25 (1<<PFD)
+#define INVERT_PWM (1<<IPI)
+#define CURRENT_LIMIT(N) ((N&0x0F)<<VIL0)
+#define VDS_DEBOUNCE_MODE 0
+#define VDS_BLANK_MODE (1<<VDQ)
+#define VDS_THRESHOLD(N) ((N&0x1F)<<VT0)
+
+//config2 constants
+#define POSITION_P_GAIN(N) ((N&0x0F)<<CP0)
+#define OVERSPEED_100 0
+#define OVERSPEED_125 (1<<SH0)
+#define OVERSPEED_150 (1<<SH1)
+#define OVERSPEED_200 ((1<<SH0)|(1<<SH1))
+#define DEGAUSS_COMPENSATION (1<<DGC)
+#define INDIRECT_PWM_PERIOD(N) ((N&0x1F)<<PW0)
+
+//config3 constants
+#define POSITION_I_GAIN(N) ((N&0x0F)<<CI0)
+#define HOLD_DUTY_CYCLE(N) ((N&0x0F)<<HD0)
+#define HOLD_TIME(N) ((N&0x0F)<<HT0)
+
+//config4 constants
+#define SPEED_P_GAIN(N) ((N&0x0F)<<SP0)
+#define STARTUP_DUTY_CYCLE(N) ((N&0x0F)<<SD0)
+#define START_SPEED(N) ((N&0x0F)<<SS0)
+
+//config5 constants
+#define SPEED_I_GAIN(N) ((N&0x0F)<<SI0)
+#define SPEED_FG 0
+#define SPEED_TACHO (1<<SPO)
+#define MAXIMUM_SPEED(N) ((N&0x07)<<SMX0)
+#define PHASE_ADVANCE(N) ((N&0x0F)<<PA0)
+
 // run mode constants
 #define RUN_ENABLE (1<<RUN)
 #define DIR_BACKWARD (1<<DIR)
@@ -136,7 +180,6 @@
 #define CONTROL_OPEN_SPEED_DIRECT (1<<CM0)
 #define CONTROL_CLOSED_CURRENT (1<<CM1)
 #define CONTROL_CLOSED_SPEED ((1<<CM1)|(1<<CM0))
-
 
 // Range is given in RPM, for a motor with one pole pair
 // Divide by the number of pole pair of your motor to get
