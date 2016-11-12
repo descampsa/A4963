@@ -16,10 +16,8 @@ void A4963Controler::begin()
 {
 	SPI.begin();
 	// set SPD and FAULT as inputs with pullup
-	pinMode(SPD_PIN, INPUT);
-	digitalWrite(SPD_PIN, HIGH);
-	pinMode(FAULT_PIN, INPUT);
-	digitalWrite(FAULT_PIN, HIGH);
+	pinMode(SPD_PIN, INPUT_PULLUP);
+	pinMode(FAULT_PIN, INPUT_PULLUP);
 	// set PWM as output
 	pinMode(PWM_PIN, OUTPUT);
 	digitalWrite(PWM_PIN, LOW);
