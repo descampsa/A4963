@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include "A4963_def.h"
+#include "A4963_config.h"
 
 class A4963Controler
 {
