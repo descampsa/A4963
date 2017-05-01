@@ -1,3 +1,5 @@
+#ifndef __A4963_DEF__
+#define __A4963_DEF__
 
 // register address (in the 16 word)
 #define REG_CONFIG0 0x0000
@@ -193,3 +195,4 @@
 //#define SPEED_RANGE_49146 5
 //#define SPEED_RANGE_98298 6
 //#define SPEED_RANGE_196602 7
+#endif
